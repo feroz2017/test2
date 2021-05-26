@@ -99,6 +99,15 @@ const gender = [
   }
 ]
 const PersonalInfo = () => {
+  const normFile = (e) => {
+    console.log('Upload event:', e);
+  
+    if (Array.isArray(e)) {
+      return e;
+    }
+  
+    return e && e.fileList;
+  };
   const {Option} = Select;
   return (
     <React.Fragment>
@@ -116,7 +125,7 @@ const PersonalInfo = () => {
         </Select>
       </Form.Item>
 
-      <Form.Item label="DatePicker" name="dob">
+      <Form.Item label="Date Of Birth" name="dob">
           <DatePicker />
       </Form.Item>
 
@@ -128,8 +137,9 @@ const PersonalInfo = () => {
         name="idSnap"
         label="ID Snapshot"
         valuePropName="fileList"
+        getValueFromEvent={normFile}
       >
-        <Upload name="idSnap" action="/remote-server" listType="picture">
+        <Upload name="idSnap" listType="picture">
           <Button icon={<UploadOutlined />}>Click to upload</Button>
         </Upload>
       </Form.Item>

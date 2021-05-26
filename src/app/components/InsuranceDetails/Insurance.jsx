@@ -1,48 +1,17 @@
-import React, { useState } from "react";
-import { Select, Form, Upload, InputNumber } from "antd";
-import PicUploads from "../Common/PicUploads";
-const uploads = [
-  {
-    name: "frontSnap",
-    label: "Front Snapshot of Insurance Document",
-    action: "/remote-server",
-  },
-  {
-    name: "backSnbap",
-    label: "Back Snapshot of Insurance Document",
-    action: "/remote-server",
-  },
-];
-const InsuranceCompanies = ["A","B","C","D","E","F","G","H","I","J"];
-
-const Insurance = () => {
+import React from "react";
+import { Select, Form, Checkbox } from "antd";
+import Details from './Details'
+const Insurance = (props) => {
   const { Option } = Select;
-  let [insurance, setInsurance] = useState(false);
-
-  const OnInsuranceSelect = (value) => {
-    value === "yes" ? setInsurance(true) : setInsurance(false);
-  };
-  console.log(InsuranceCompanies)
   const getInsuranceDetails = () => {
-    if (insurance) {
-      return (
-        <React.Fragment>
-          <PicUploads fields={uploads} />
-          <Form.Item
-            name="insuranceCompany"
-            label="Insurance Company"
-            rules={[{ required: true, message: "Select Insurnace Company" }]}
-          >
-            <Select placeholder="Select Insurnace Company">
-              {InsuranceCompanies.map((comp,index)=> <Option key={index} value={comp.toLowerCase()}>{comp}</Option>)}
-            </Select>
-          </Form.Item>
-          <Form.Item label="Insurance number" name="insuranceNum">
-          <InputNumber />
-        </Form.Item>
-        </React.Fragment>
-      );
-    } else {
+    if (props.insuranceStatus === "yes") {
+      return <Details/>
+    } else  if(props.insuranceStatus === "no"){
+     return ( <Form.Item name="attestation" >
+     <Checkbox>
+      Insurance Document Attestation
+     </Checkbox>
+   </Form.Item>)
     }
   };
   return (
@@ -54,7 +23,7 @@ const Insurance = () => {
       >
         <Select
           placeholder="Do you have Insurance"
-          onChange={OnInsuranceSelect}
+          onChange={(value)=>props.setInsuranceStatus(value)}
         >
           <Option value="yes">Yes</Option>
           <Option value="no">No</Option>
