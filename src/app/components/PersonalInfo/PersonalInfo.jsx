@@ -79,6 +79,25 @@ const addressInfo = [
     ]
   },
 ]
+
+const gender = [
+  {
+    name: "gender",
+    label: "Gender",
+    rules:[{ required: true, message: 'Please select gender!' }],
+    placeholder: "Select your gender",
+    options:[
+    {
+      value:"male",
+      tag: "Male"
+    },
+    {
+      vlaue: "female",
+      tag: "Female"
+    }
+  ]
+  }
+]
 const PersonalInfo = () => {
   const {Option} = Select;
   return (
@@ -88,7 +107,7 @@ const PersonalInfo = () => {
       <Form.Item
         name="gender"
         label="Gender"
-        rules={[{ required: true, message: 'Please select gender!' }]}
+        rules={ [{ required: true, message: 'Please select gender!' }] }
       >
         <Select placeholder="Select your gender">
           <Option value="male">Male</Option>

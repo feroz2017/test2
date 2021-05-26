@@ -3,6 +3,7 @@ import React from "react";
 import { Form, Button, Divider } from "antd";
 
 import PersonalInfo from "../components/PersonalInfo/PersonalInfo";
+import Insurance from "../components/InsuranceDetails/Insurance"
 
 const PatientForm = () => {
   const onSubmission = (submission) => {
@@ -13,6 +14,7 @@ const PatientForm = () => {
       <Divider orientation="left">Personal Information</Divider>
       <PersonalInfo />
       <Divider orientation="left">Insurance Details</Divider>
+      <Insurance/>
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
